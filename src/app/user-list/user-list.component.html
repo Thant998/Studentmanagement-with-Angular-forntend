@@ -1,0 +1,165 @@
+<head>
+    <title>Course Registration</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  </head>
+  
+  <body>
+  <div id="testheader">
+    <div class="container">
+      <div class=row>
+        <div class="col-md-5 ">
+          <a routerLink="/menu" routerLinkActive="active">
+            <h3>Student Registration</h3>
+          </a>
+        </div>
+        <div class="col-md-6">
+  
+          <p style="color:rgb(10, 10, 10);">User: {{userid}}</p>
+          <p style="color:rgb(13, 13, 14);">Current Date : {{date}}</p>
+        </div>
+        <div class="col-md-1">
+          <a class="btn btn-link" routerLink="/login" ><b>Logout</b></a>
+            </div> 
+      </div>
+    </div>
+  
+  </div>
+  
+  <div class="container">
+    <div class="sidenav">
+      <a routerLink="/course">Course Registration </a>
+      <a routerLink="/student-add">Student Registration </a>
+      <a routerLink="/student">Student Search </a>
+      <a routerLink="/user">Users Management</a>
+    </div>
+    <div class="main_contents">
+      <div id="sub_content">
+
+        Export to :
+        <button  (click) = "exportHTML()" class="btn btn-info mb-2" >
+          HTML  <i class="	fa fa-file-code-o"></i>
+       </button>
+
+        <div class="space"> </div>
+
+        <button (click) = "exportPDF()" class="btn btn-info mb-2" >
+          PDF  <i class="fa fa-file-pdf-o"></i>
+          </button>
+
+        <div class="space"></div>
+
+        <button  (click) = "exportExcel()" class="btn btn-info mb-2" >
+          Excel  <i class="fa fa-file-excel-o"></i>
+        </button>
+
+        <form class="row g-3 mt-3 ms-2" (ngSubmit)="onSubmit()"  >
+          <div class="col-auto" >
+            <label for="staticEmail2" class="visually-hidden">User Id</label>
+            <input type="text" class="form-control" id="staticEmail2" placeholder="User ID" name="id" [(ngModel)]="search.id"  >
+          </div>
+          <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">User Name</label>
+            <input type="text" class="form-control" id="inputPassword2" placeholder="User Name" name="name" [(ngModel)]="search.name"  >
+          </div>
+  
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" >
+             Search
+            </button> 
+            <!--<a type="button" class="btn btn-primary mb-3" disabled="true" >-->
+    
+          </div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-success mb-2"  routerLink="/user-add">
+              Add
+            </a>
+          </div>
+  
+          <div class="col-auto">
+            <!--<button type="submit" (cclass="btn btn-danger mb-3">Reset</button>-->
+            <a type="button" class="btn btn-danger mb-2"  routerLink="/user">Reset</a>
+          </div>
+         
+        </form>
+  
+  
+        <table class="table table-striped" id="stduentTable">
+          <thead>
+          <tr>
+  
+            <th scope="col">User ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Details</th>
+  
+          </tr>
+          </thead>
+          <tbody>
+  
+  
+  
+          <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+  
+         <td> <button (click) = "updateUser(user.id)" class="btn btn-success mb-2" > Update</button></td>
+       <td> <button (click) = "deleteUser(user.id)" class="btn btn-danger mb-3"> Delete</button></td>
+  </tr>
+  
+   </tbody>
+        </table>
+  
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Student Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+  
+                <h5 style="color: rgb(127, 209, 131);">Are you sure want to delete !</h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success col-md-2"
+                        data-bs-dismiss="modal">Ok</button>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="testfooter">
+    <span>Copyright &#169; ACE Inspiration 2022</span>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+          crossorigin="anonymous"></script>
+  <script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+  
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  </script>
+  </body>
+  

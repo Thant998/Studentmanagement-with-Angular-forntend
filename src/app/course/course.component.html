@@ -1,0 +1,81 @@
+<title>Course Registration</title>
+  <div id="testheader">
+      <div class="container">
+        <div class=row>
+          <div class="col-md-5 ">
+            <a routerLink="/menu" routerLinkActive="active"><h3>Student Registration</h3></a>
+          </div>
+          <div class="col-md-6">
+            <p>User: {{id}}</p>
+            <p>Current Date : {{time}} </p>
+          </div>
+          <div class="col-md-1">
+            <a class="col-md-1" routerLink="/login" ><b>Logout</b></a>
+              </div>  
+        </div>
+      </div>
+   </div>
+    <div class="container">
+      <div class="sidenav">
+        <a routerLink="/course">Course Registration </a>
+        <a routerLink="/student-add">Student Registration </a>
+        <a routerLink="/student">Student Search </a>
+        <a routerLink="/user" routerLinkActive="active">Users Management</a>
+      </div>
+      <div class="main_contents">
+        <div id="sub_content">
+  
+          <form  #templateDrivenForm = "ngForm" (ngSubmit)="onSubmit(templateDrivenForm)" >
+          <h2 class="col-md-6 offset-md-2 mb-5 mt-4">Course Registration</h2>
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="id" class="col-md-2 col-form-label">Course ID</label>
+            <div class="col-md-4">
+              <input type="text" placeholder="ID"  class="form-control" id="id"[(ngModel)]="course.id" name="id">
+              <span class="text-danger" *ngIf = "submitted">
+                Id is required
+              </span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="name" class="col-md-2 col-form-label">Name</label>
+            <div class="col-md-4">
+              <input type="text" placeholder="Name" class="form-control" id="name"  [(ngModel)]="course.name" name="name">
+            </div>
+            <span class="text-danger" *ngIf = "submitted">
+                Name is required
+            </span>
+          </div>
+      <div class="row mb-4">
+          <div class="col-md-4"></div>
+          <div class="col-md-6">
+    <button type="submit" class="btn btn-success col-md-2 addsubmits" data-bs-toggle="modal"
+     data-bs-target="#exampleModal">Add</button>
+         </div>
+      </div>
+  </form>
+  
+  
+  
+  
+  <div id="testfooter">
+    <span>Copyright &#169; ACE Inspiration 2022</span>
+  </div>
+  <script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+  
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  </script>

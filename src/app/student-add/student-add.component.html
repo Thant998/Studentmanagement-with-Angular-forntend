@@ -1,0 +1,173 @@
+<head>
+    <title>Course Registration</title>
+  </head>
+  <body>
+  <div id="testheader">
+    <div class="container">
+      <div class=row>
+        <div class="col-md-5 ">
+          <a routerLink="/menu" routerLinkActive="active"><h3>Student Registration</h3></a>
+        </div>
+        <div class="col-md-6">
+          <p>User:{{id}}</p>
+          <p>Current Date : {{time}} </p>
+        </div>
+        <div class="col-md-1">
+          <a class="col-md-1" routerLink="/login" ><b>Logout</b></a>
+            </div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="sidenav">
+      <a routerLink="/course">Course Registration </a>
+      <a routerLink="/student-add">Student Registration </a>
+      <a routerLink="/student">Student Search </a>
+      <a routerLink="/user" routerLinkActive="active">Users Management</a>
+    </div>
+    <div class="main_contents">
+      <div id="sub_content">
+  
+      <form (ngSubmit)="onSubmit()">
+  
+          <h2 class="col-md-6 offset-md-2 mb-5 mt-4">Student Registration</h2>
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="name" class="col-md-2 col-form-label">ID</label>
+            <div class="col-md-4">
+              <input type="text" placeholder="ID" class="form-control" id="id" name="id" [(ngModel)]="student.id">
+            </div>
+  
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="name" class="col-md-2 col-form-label">Name</label>
+            <div class="col-md-4">
+              <input type="text" placeholder="Name" class="form-control" id="name" name="studentName" [(ngModel)]="student.name">
+            </div>
+  
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="dob" class="col-md-2 col-form-label">DOB</label>
+            <div class="col-md-4">
+              <input type="date"  placeholder="Birthday" class="form-control" id="dob" name="studentDob" [(ngModel)]="student.dob" placeholder="Student ID">
+            </div>
+  
+          </div>
+          <fieldset class="row mb-4">
+            <div class="col-md-2"></div>
+            <legend class="col-form-label col-md-2 pt-0">Gender</legend>
+            <div class="col-md-4">
+              <div class="form-check-inline">
+                <input type="radio" class="form-check-input" id="gridRadios1" value="male" name="studentGender" [(ngModel)]="student.gender" >
+                <label class="form-check-label" for="gridRadios1">
+                  Male
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <input type="radio" class="form-check-input" id="gridRadios2" value="female" name="studentGender" [(ngModel)]="student.gender">
+                <label class="form-check-label" for="gridRadios2">
+                  Female
+                </label>
+              </div>
+  
+            </div>
+          </fieldset>
+  
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="phone" class="col-md-2 col-form-label">Phone</label>
+            <div class="col-md-4">
+              <input type="text"  class="form-control" id="phone" placeholder="+95" name="studentPhone"  [(ngModel)]="student.phone">
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="education" class="col-md-2 col-form-label">Education</label>
+            <div class="col-md-4">
+              <select class="form-select"  aria-label="Education" id="education" name="studentEducation" [(ngModel)]="student.education" >
+                <option value="Bechelor of Information Technology" >Bachelor of Information Technology</option>
+                <option value="Diplin in IT">Diploma in IT</option>
+                <option value="Bechelor of Computer Science">Bachelor of Computer Science</option>
+              </select>
+            </div>
+          </div>
+  
+          <fieldset class="row mb-4">
+            <div class="col-mb-4 gap-3 d-flex flex-wrap">
+            <div class="col-sm-2"></div>
+  
+            <legend class="col-form-label col-md-2 pt-0">Attend</legend>
+  
+            <div class="d-flex gap-1"  *ngFor="let course of courses" >
+  
+              <input type="checkbox"  class="form-check" name="studentCourse" value={{course.name}} (change)="addCourse(course.id)"  >
+                     {{course.name}}
+            </div>
+  
+            <div class="col-md-4"></div>
+            </div>
+          </fieldset>
+  
+  
+          <div class="row mb-4">
+            <div class="col-md-4"></div>
+  
+            <div class="col-md-4">
+              <button type="reset" class="btn btn-danger ">
+                Reset
+              </button>
+              &nbsp;
+              <button type="submit" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                   aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Student Registration</h5>
+                      <button type="submit" class="btn-close" data-bs-dismiss="modal"
+                              aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h5 style="color: rgb(127, 209, 131);">Registered Succesfully !</h5>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-success col-md-2" data-bs-dismiss="modal">Ok</button>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </form>
+      </div>
+  
+  
+      <div id="testfooter">
+        <span>Copyright &#169; ACE Inspiration 2022</span>
+      </div>
+      <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+  
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+              dropdownContent.style.display = "none";
+            } else {
+              dropdownContent.style.display = "block";
+            }
+          });
+        }
+      </script>
+    </div></div></body>

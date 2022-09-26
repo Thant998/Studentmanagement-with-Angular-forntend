@@ -1,0 +1,108 @@
+<head>
+    <title>Course Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  
+  <body>
+  <div id="testheader">
+    <div class="container">
+      <div class=row>
+        <div class="col-md-5 ">
+          <a routerLink="/menu" routerLinkActive="active"><h3>Student Registration</h3></a>
+        </div>
+        <div class="col-md-6">
+          <p>User: {{id}}</p>
+          <p>Current Date : {{time}}</p>
+        </div>
+        <div class="col-md-1">
+          <a class="col-md-1" routerLink="/login" ><b>Logout</b></a>
+            </div> 
+      </div>
+    </div>
+  
+  </div>
+  
+  <div class="container">
+    <div class="sidenav">
+      <a routerLink="/course">Course Registration </a>
+      <a routerLink="/student-add">Student Registration </a>
+      <a routerLink="/student">Student Search </a>
+      <a routerLink="/user" routerLinkActive="active">Users Management</a>
+    </div>
+    <div class="main_contents">
+      <div id="sub_content">
+        <!--<div class="col-auto">-->
+          Export to :
+          <button  (click) = "exportHtml()" class="btn btn-info mb-2" >
+            HTML  <i class="fa fa-file-code-o"></i>
+         </button>
+
+           <div class="space"></div>
+           <button (click) = "exportPdf()" class="btn btn-info mb-2" >
+            PDF  <i class="fa fa-file-pdf-o"></i>
+            </button>
+
+           <div class="space">
+
+          </div>
+           <button  (click) = "exportExcel()" class="btn btn-info mb-2" >
+             Excel  <i class="fa fa-file-excel-o"></i>
+           </button>
+         <!--</div>-->
+  
+        <form   (ngSubmit)="onSubmit()" class="row g-3 mt-3 ms-2" >
+          <div class="col-auto">
+            <label for="staticEmail2" class="visually-hidden">studentID</label>
+            <input type="text"  class="form-control" id="staticEmail2" placeholder="Student ID" name="studentId" [(ngModel)]="student.id">
+          </div>
+          <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">studentName</label>
+            <input type="text" class="form-control" id="inputPassword2" placeholder="Student Name" name="studentName" [(ngModel)]="student.name">
+          </div>
+          <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Course</label>
+            <input type="text" class="form-control" id="inputPassword2" placeholder="Course" name="studentCourse" [(ngModel)]="coursename.name">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Search</button>
+          </div>
+          <div class="col-auto">
+            <a type="button" class="btn btn-danger mb-2"  routerLink="/student">Reset</a>
+          </div>
+          
+          
+        </form>
+        
+        <div>
+          <table class="table table-striped" id="stduentTable">
+            <thead>
+            <tr>
+              <th scope="col">Student ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Courses</th>
+              <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+  
+            <tr *ngFor="let student of students">
+              <td>{{student.id}}</td>
+              <td>{{student.name}}</td>
+              <td>
+                <span *ngFor="let course of student.courses" >{{course.name}} ,</span>
+              </td>
+              <td><button (click) = "updateStudent(student.id)" class="btn btn-info mb-2"
+                 routerLinkActive="active">See More</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  <div id="testfooter">
+    <span>Copyright &#169; ACE Inspiration 2022</span>
+  </div>
